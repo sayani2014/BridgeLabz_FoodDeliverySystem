@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.stream.Stream;
 
 public class FoodStore {
     Set<FoodItem> foodList = new HashSet<>();
@@ -12,78 +13,35 @@ public class FoodStore {
     }
 
     public void display() {
-        Iterator iterator = foodList.iterator();
-        while(iterator.hasNext()) {
-            System.out.println(iterator.next());
-        }
-        System.out.println();
-        /*for (int i = 0; i < foodList.size(); i++) {
-            System.out.println(foodList.get(i));
-        }*/
+        Stream.of(foodList).forEach(
+                 System.out::println
+        );
     }
 
     public void displayJuices() {
-        Iterator iterator = foodList.iterator();
-        while(iterator.hasNext()) {
-            FoodItem foodItem = (FoodItem)iterator.next();
-            if(foodItem.foodCategory ==FoodItem.Category.JUICES) {
-                System.out.println(iterator.next());
-            }
-        }
-        System.out.println();
-        /*for (int i = 0; i < foodList.size(); i++) {
-            if(foodList.get(i).foodCategory == FoodItem.Category.JUICES) {
-                System.out.println(foodList.get(i));
-            }
-        }*/
+        foodList.stream().filter(x -> x.foodCategory == FoodItem.Category.JUICES)
+                .forEach(System.out::println);
     }
 
     public void displayDessert() {
-        Iterator iterator = foodList.iterator();
-        while(iterator.hasNext()) {
-            FoodItem foodItem = (FoodItem)iterator.next();
-            if(foodItem.foodCategory ==FoodItem.Category.DESSERT) {
-                System.out.println(iterator.next());
-            }
-        }
-        System.out.println();
-        /*for (int i = 0; i < foodList.size(); i++) {
-            if(foodList.get(i).foodCategory == FoodItem.Category.DESSERT) {
-                System.out.println(foodList.get(i));
-            }
-        }*/
+        foodList.stream().filter(x -> x.foodCategory == FoodItem.Category.DESSERT)
+                .forEach(System.out::println);
     }
 
     public void displayMainCourse() {
-        Iterator iterator = foodList.iterator();
-
-        while(iterator.hasNext()) {
-            FoodItem foodItem = (FoodItem)iterator.next();
-            if(foodItem.foodCategory == FoodItem.Category.MAIN_COURSE) {
-                System.out.println(foodItem);
-            }
-        }
-        System.out.println();
-        /*for (int i = 0; i < foodList.size(); i++) {
-            if(foodList.get(i).foodCategory == FoodItem.Category.MAIN_COURSE) {
-                System.out.println(foodList.get(i));
-            }
-       }*/
+        foodList.stream().filter(x -> x.foodCategory == FoodItem.Category.MAIN_COURSE)
+                .forEach(System.out::println);
     }
 
     public void displayStarter() {
-        Iterator iterator = foodList.iterator();
-        while(iterator.hasNext()) {
-            FoodItem foodItem = (FoodItem)iterator.next();
-            if(foodItem.foodCategory ==FoodItem.Category.STARTER) {
-                System.out.println(iterator.next());
-            }
-        }
-        System.out.println();
-        /*for (int i = 0; i < foodList.size(); i++) {
-            if(foodList.get(i).foodCategory == FoodItem.Category.STARTER) {
-                System.out.println(foodList.get(i));
-            }
-        }*/
+        foodList.stream().filter(x -> x.foodCategory == FoodItem.Category.STARTER)
+                .forEach(System.out::println);
+    }
+
+    public void placeOrder(String name) {
+        foodList.stream().filter(x -> x.foodname.equals(name)).
+                forEach(foodItem -> {
+                    System.out.println("Price of " + foodItem.foodname + "is : " +foodItem.price);
+                });
     }
 }

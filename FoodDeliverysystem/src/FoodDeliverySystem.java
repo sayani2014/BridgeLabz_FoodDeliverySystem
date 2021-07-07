@@ -7,12 +7,13 @@ public class FoodDeliverySystem {
     public void userMenu() {
         while(true) {
             System.out.println("1. Add Food Items");
-            System.out.println("2. Display all Food Items");
+            System.out.println("2. Display All Food Items");
             System.out.println("3. Display STARTER");
             System.out.println("4. Display MAIN_COURSE");
             System.out.println("5. Display JUICES");
             System.out.println("6. Display DESSERT");
-            System.out.println("7. Quit");
+            System.out.println("7. Place the Order");
+            System.out.println("8. Quit");
 
             int option = input.nextInt();
 
@@ -42,18 +43,29 @@ public class FoodDeliverySystem {
                     foodStore.displayDessert();
                     break;
                 case 7:
+                    System.out.println("\n" + "Place the Order ");
+                    System.out.println("\nPlease select the menu item");
+                    String name = input.next().concat(input.nextLine());
+                    foodStore.placeOrder(name);
+                    break;
+                case 8:
                     return;
-                    //break;
             }
         }
     }
+
     public void addfoodDetails(){
         while(true) {
             FoodItem foodItem = new FoodItem();
+
             System.out.print("Enter the food Name: ");
-            foodItem.foodname = input.next().toString();
-            System.out.print("Enter the food price: ");
-            foodItem.price = input.nextInt();
+            foodItem.foodname = input.next();
+            foodItem.foodname += input.nextLine();
+
+            foodItem.price = inputPrice();
+
+            System.out.println("Enter the food quanity");
+            foodItem.quantity = input.nextInt();
 
             System.out.println("Enter the food taste");
             System.out.println("Press 1- Salty");
@@ -91,47 +103,29 @@ public class FoodDeliverySystem {
             break;
         }
     }
+
+    public int inputPrice() {
+        int price = 0;
+        boolean check = true;
+        while (check) {
+            try {
+                System.out.print("Enter the food price: ");
+                price = input.nextInt();
+                check = false;
+            } catch (Exception e) {
+                System.out.println("\nPlease enter a proper value\n");
+                check = true;
+            }
+            input.nextLine();
+        }
+        return price;
+    }
+
     public static void main(String[] args) {
         FoodDeliverySystem foodDeliverySystem = new FoodDeliverySystem();
 
         System.out.println("Welcome to Food Delivery System" + "\n");
-
-        /*Biryani biryani = new Biryani();
-        biryani.price = 120;
-        biryani.quantity = 1;
-
-        MasalaPapad masalaPapad = new MasalaPapad();
-        masalaPapad.price = 50;
-        masalaPapad.quantity = 3;
-
-        IdliDosa idliDosa = new IdliDosa();
-        idliDosa.price = 80;
-        idliDosa.quantity = 2;
-
-        PavBhaji pavbhaji = new PavBhaji();
-        pavbhaji.price = 70;
-        pavbhaji.quantity = 1;
-
-        IceCream iceCream = new IceCream();
-        iceCream.price = 150;
-        iceCream.quantity = 5;
-
-        MilkShake milkShake = new MilkShake();
-        milkShake.price = 200;
-        milkShake.quantity = 4;
-
-        foodStore.add(biryani);
-        foodStore.add(masalaPapad);
-        foodStore.add(pavbhaji);
-        foodStore.add(idliDosa);
-        foodStore.add(iceCream);
-        foodStore.add(milkShake);*/
-
         foodDeliverySystem.userMenu();
-
-
-        //Choose menu option
-        //foodDeliverySystem.userMenu();
     }
 }
 
