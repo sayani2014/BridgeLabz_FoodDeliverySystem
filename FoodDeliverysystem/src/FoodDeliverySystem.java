@@ -2,18 +2,20 @@ import java.util.Scanner;
 
 public class FoodDeliverySystem {
     Scanner input = new Scanner(System.in);
-    FoodStore foodStore = new FoodStore();
+    FoodStore foodStore = FoodStore.getInstance();
 
     public void userMenu() {
         while(true) {
-            System.out.println("\n1. Add Food Items");
-            System.out.println("2. Display All Food Items");
-            System.out.println("3. Display STARTER");
-            System.out.println("4. Display MAIN_COURSE");
-            System.out.println("5. Display JUICES");
-            System.out.println("6. Display DESSERT");
-            System.out.println("7. Place the Order");
-            System.out.println("8. Quit");
+            System.out.println("\n 1. Add Food Items");
+            System.out.println(" 2. Display All Food Items");
+            System.out.println(" 3. Display STARTER");
+            System.out.println(" 4. Display MAIN_COURSE");
+            System.out.println(" 5. Display JUICES");
+            System.out.println(" 6. Display DESSERT");
+            System.out.println(" 7. Place the Order");
+            System.out.println(" 8. Display a particular order");
+            System.out.println(" 9. Display all orders");
+            System.out.println("10. Quit");
 
             int option = input.nextInt();
 
@@ -47,6 +49,14 @@ public class FoodDeliverySystem {
                     foodStore.placeOrder();
                     break;
                 case 8:
+                    System.out.println("\n" + "Displaying a particular order ");
+                    OrderStore.getInstance().viewParticularOrder();
+                    break;
+                case 9:
+                    System.out.println("\n" + "Displaying all orders ");
+                    OrderStore.getInstance().viewAllOrder();
+                    break;
+                case 10:
                     return;
             }
         }
@@ -119,7 +129,7 @@ public class FoodDeliverySystem {
     public static void main(String[] args) {
         FoodDeliverySystem foodDeliverySystem = new FoodDeliverySystem();
 
-        System.out.println("Welcome to Food Delivery System" + "\n");
+        System.out.println("\nWelcome to Food Delivery System");
         foodDeliverySystem.userMenu();
     }
 }

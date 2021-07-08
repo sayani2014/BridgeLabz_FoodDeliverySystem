@@ -2,22 +2,27 @@ import java.util.*;
 import java.util.stream.Stream;
 
 public class FoodStore {
+    private static FoodStore instance;
     Set<FoodItem> foodList = new HashSet<>();
-    OrderStore orderStore = new OrderStore();
+    OrderStore orderStore = OrderStore.getInstance();
     Scanner input = new Scanner(System.in);
+
+    private FoodStore() {
+    }
+
+    public static synchronized FoodStore getInstance() {
+        if(instance == null)
+            instance = new FoodStore();
+
+        return instance;
+    }
 
     public void add(FoodItem foodItem) {
         foodList.add(foodItem);
     }
 
-    public void remove(FoodItem foodItem) {
-        foodList.remove(foodItem);
-    }
-
     public void display() {
-        Stream.of(foodList).forEach(
-                 System.out::println
-        );
+        Stream.of(foodList).forEach(System.out::println);
     }
 
     public void displayJuices() {
@@ -44,24 +49,24 @@ public class FoodStore {
 
         Order orderObj = new Order();
 
-        System.out.println("\nPlease enter orderID");
+        System.out.print("\nPlease enter orderID : ");
         orderObj.setOrderID(input.nextInt());
 
-        System.out.println("\nPlease enter delivery address");
+        System.out.print("Please enter delivery address : ");
         orderObj.setDeliveryAddress(input.next());
 
         while(true) {
-            System.out.println("Press 1 to place order");
+            System.out.println("\nPress 1 to place order");
             System.out.println("Press 2 to exit");
             int choice = input.nextInt();
 
             if(choice == 1) {
 
-                System.out.println("\nPlease select the menu item");
+                System.out.print("\nPlease select the menu item : ");
                 String name = input.next().concat(input.nextLine());
 
 
-                System.out.println("\nPlease enter food quantity");
+                System.out.print("Please enter food quantity : ");
                 int quantity = input.nextInt();
 
                 foodList.stream().filter(x -> x.foodname.equals(name)).
@@ -74,8 +79,7 @@ public class FoodStore {
                 break;
         }
 
-        System.out.println("\nOrder placed successfully!\n");
         orderStore.add(orderObj);
-        //System.out.println(orderObj);
+        System.out.println("\nOrder placed successfully!");
     }
 }

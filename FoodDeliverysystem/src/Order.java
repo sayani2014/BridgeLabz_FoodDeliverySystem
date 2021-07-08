@@ -15,7 +15,6 @@ public class Order {
     public void setTotalPrice() {
         totalPrice = hMap.entrySet().stream().map(item -> item.getKey().price * item.getValue())
                 .reduce(0, (total, item) -> total + item);
-        //System.out.println("\nTotal Price after placing the order is : " +totalPrice +"\n");
     }
 
     public int getTotalPrice() {
@@ -41,10 +40,10 @@ public class Order {
     @Override
     public String toString() {
         return "Order{" +
-                "orderID=" + orderID +
-                ", totalPrice=" + totalPrice +
-                ", deliveryAddress='" + deliveryAddress + '\'' +
-                ", orderstatus=" + orderstatus +
+                "OrderID=" + orderID +
+                ", TotalPrice=" + totalPrice +
+                ", DeliveryAddress='" + deliveryAddress + '\'' +
+                ", Orderstatus=" + orderstatus +
                 '}';
     }
 }
