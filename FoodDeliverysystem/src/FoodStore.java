@@ -3,6 +3,8 @@ import java.util.stream.Stream;
 
 public class FoodStore {
     Set<FoodItem> foodList = new HashSet<>();
+    OrderStore orderStore = new OrderStore();
+    Scanner input = new Scanner(System.in);
 
     public void add(FoodItem foodItem) {
         foodList.add(foodItem);
@@ -38,10 +40,42 @@ public class FoodStore {
                 .forEach(System.out::println);
     }
 
-    public void placeOrder(String name) {
-        foodList.stream().filter(x -> x.foodname.equals(name)).
-                forEach(foodItem -> {
-                    System.out.println("Price of " + foodItem.foodname + "is : " +foodItem.price);
-                });
+    public void placeOrder() {
+
+        Order orderObj = new Order();
+
+        System.out.println("\nPlease enter orderID");
+        orderObj.setOrderID(input.nextInt());
+
+        System.out.println("\nPlease enter delivery address");
+        orderObj.setDeliveryAddress(input.next());
+
+        while(true) {
+            System.out.println("Press 1 to place order");
+            System.out.println("Press 2 to exit");
+            int choice = input.nextInt();
+
+            if(choice == 1) {
+
+                System.out.println("\nPlease select the menu item");
+                String name = input.next().concat(input.nextLine());
+
+
+                System.out.println("\nPlease enter food quantity");
+                int quantity = input.nextInt();
+
+                foodList.stream().filter(x -> x.foodname.equals(name)).
+                        forEach(foodItem -> {
+                            orderObj.hMap.put(foodItem , quantity);
+                           });
+                orderObj.setTotalPrice();
+            }
+            else
+                break;
+        }
+
+        System.out.println("\nOrder placed successfully!\n");
+        orderStore.add(orderObj);
+        //System.out.println(orderObj);
     }
 }

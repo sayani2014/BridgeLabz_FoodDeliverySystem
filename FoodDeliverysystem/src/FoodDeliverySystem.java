@@ -6,7 +6,7 @@ public class FoodDeliverySystem {
 
     public void userMenu() {
         while(true) {
-            System.out.println("1. Add Food Items");
+            System.out.println("\n1. Add Food Items");
             System.out.println("2. Display All Food Items");
             System.out.println("3. Display STARTER");
             System.out.println("4. Display MAIN_COURSE");
@@ -44,9 +44,7 @@ public class FoodDeliverySystem {
                     break;
                 case 7:
                     System.out.println("\n" + "Place the Order ");
-                    System.out.println("\nPlease select the menu item");
-                    String name = input.next().concat(input.nextLine());
-                    foodStore.placeOrder(name);
+                    foodStore.placeOrder();
                     break;
                 case 8:
                     return;
@@ -63,9 +61,6 @@ public class FoodDeliverySystem {
             foodItem.foodname += input.nextLine();
 
             foodItem.price = inputPrice();
-
-            System.out.println("Enter the food quanity");
-            foodItem.quantity = input.nextInt();
 
             System.out.println("Enter the food taste");
             System.out.println("Press 1- Salty");

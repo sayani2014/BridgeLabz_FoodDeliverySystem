@@ -9,7 +9,6 @@ public class FoodItem {
     String foodname;
     int price;
     Taste taste;
-    int quantity;
     Category foodCategory;
 
     @Override
@@ -18,7 +17,6 @@ public class FoodItem {
                 "foodname='" + foodname + '\'' +
                 ", price=" + price +
                 ", taste=" + taste +
-                ", quantity=" + quantity +
                 ", foodCategory=" + foodCategory +
                 '}';
     }
